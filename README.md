@@ -13,24 +13,26 @@ powershell-DB  ด้วย MAMP และ gemini cli
 
 5. ตรวจสอบ MySQL ใน MAMP ก่อน  ด้วยคำสั่ง  :
 
-   netstat -ano | findstr :3306
+   `netstat -ano | findstr :3306`
 
 6. ทดสอบ MySQL ก่อนต่อ Gemini
-- & "C:\MAMP\bin\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3306 -u root -proot
+- `& "C:\MAMP\bin\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3306 -u root -proot`
 
-- SHOW DATABASES;
+- `SHOW DATABASES;`
 
-- USE ecommerce;
-- SHOW TABLES;
+- `USE ecommerce;`
+- `SHOW TABLES;`
 
 7. ตรวจสอบ Database ที่ต้องการ
-- USE ecommerce;
-- SHOW TABLES;
+- `USE ecommerce;`
+- `SHOW TABLES;`
 
 8. ตรวจสอบการติดตั้ง gemini cli   (https://geminicli.com/docs/get-started/installation/)
 9. ติดตั้ง Gemini CLI MySQL Extension  Gemini CLI มี MySQL Extension อย่างเป็นทางการจาก gemini-cli-extensions/mysql ซึ่งทำงานผ่าน MCP และใช้ npx เป็นตัวรัน MCP serve
-   - gemini extensions install https://github.com/gemini-cli-extensions/mysql
+   - `gemini extensions install https://github.com/gemini-cli-extensions/mysql`
 
    กรณี PowerShell กำลังบล็อกไฟล์   (gemini.ps1 cannot be loaded) ให้ใช้คำสั่ง :
-  - Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+  - `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
 
+   แล้ว รัน อีกครั้ง `gemini extensions install https://github.com/gemini-cli-extensions/mysql`
+   
