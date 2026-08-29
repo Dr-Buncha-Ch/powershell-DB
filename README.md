@@ -40,21 +40,22 @@ powershell-DB  ด้วย MAMP และ gemini cli
    `gemini extensions list`
 
 10. สร้าง User ให้ gemini
-    `CREATE USER 'gemini'@'localhost'
-      IDENTIFIED BY 'GeminiDB@123';`
+    ```
+    CREATE USER 'gemini'@'localhost'
+      IDENTIFIED BY 'GeminiDB@123';
+   ```
 
-
-`
+```
 GRANT SELECT, SHOW VIEW
 ON ecommerce.*
 TO 'gemini'@'localhost';
-`
+```
 
 11. ตั้ง Gemini ให้ใช้ User นี้ (เปลี่ยนรหัสผ่าน)
-`
+```
    $env:MYSQL_HOST="127.0.0.1"
    $env:MYSQL_PORT="3306"
    $env:MYSQL_DATABASE="ecommerce"
    $env:MYSQL_USER="gemini"
    $env:MYSQL_PASSWORD="GeminiDB@123"
-`
+```
