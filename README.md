@@ -52,9 +52,9 @@ TO 'gemini'@'localhost';
 
 11. ตั้ง Gemini ให้ใช้ User นี้ (เปลี่ยนรหัสผ่าน)
 `
-$env:MYSQL_HOST="127.0.0.1"
-$env:MYSQL_PORT="3306"
-$env:MYSQL_DATABASE="ecommerce"
-$env:MYSQL_USER="gemini"
-$env:MYSQL_PASSWORD="GeminiDB@123"
+   $env:MYSQL_HOST="127.0.0.1"
+   $env:MYSQL_PORT="3306"
+   $env:MYSQL_DATABASE="ecommerce"
+   $env:MYSQL_USER="gemini"
+   $env:MYSQL_PASSWORD="GeminiDB@123"
 `
