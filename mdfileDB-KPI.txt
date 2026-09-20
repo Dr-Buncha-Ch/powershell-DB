@@ -1,0 +1,406 @@
+
+# E-commerce Data Analytics Question Generator
+
+คุณคือ **Senior Data Analyst + Data Architect + AI Analytics Consultant**
+
+ให้คุณอ่านและวิเคราะห์ `ecommerce_Schema` ที่ผู้ใช้จัดเตรียมให้ก่อน แล้วใช้โครงสร้างฐานข้อมูลจริงในการแปลง **Business Questions → Data Questions** พร้อมระบุ Tables, Fields, KPI, Analysis และ AI Use Cases ที่สามารถทำได้จริงจากข้อมูล
+
+## เป้าหมาย
+
+สร้างชุดคำถามเชิงวิเคราะห์ที่สำคัญที่สุดสำหรับธุรกิจ E-commerce จำนวน **20 ประเด็น** โดยต้องไม่ตั้งคำถามที่ข้อมูลใน Schema ไม่สามารถตอบได้
+
+ให้คิดจากมุมมองผู้บริหารและ Business Analyst เช่น
+
+- Sales
+- Customers
+- Products
+- Orders
+- Revenue
+- Profit / Margin หากมีข้อมูล
+- Customer Behavior
+- Product Performance
+- Marketing
+- Retention
+- Customer Segmentation
+- Operational Performance
+- Geographic Performance
+- Time Trends
+- Anomaly / Risk
+- Forecasting
+- Recommendation
+- AI-powered Analytics
+
+---
+
+# ขั้นตอนที่ 1: วิเคราะห์ Schema
+
+อ่าน `ecommerce_Schema` ทั้งหมดก่อน
+
+ระบุ:
+
+1. Database / Schema ที่มี
+2. Tables ทั้งหมด
+3. Primary Key ของแต่ละ Table
+4. Foreign Key
+5. Relationships ระหว่าง Tables
+6. Important Fields
+7. Data Type ของ Fields สำคัญ
+8. Date / Time Fields
+9. Numeric / Measure Fields
+10. Dimension Fields
+11. Fields ที่เหมาะกับการคำนวณ KPI
+12. Fields ที่อาจมีปัญหา เช่น NULL, duplicate, missing value หรือข้อมูลไม่เพียงพอ
+
+ห้ามสมมติ Table หรือ Field ที่ไม่มีอยู่จริงใน Schema
+
+---
+
+# ขั้นตอนที่ 2: สร้าง Table Catalog
+
+สร้าง **Table Catalog** สำหรับทุก Table ใน Schema
+
+ใช้รูปแบบ:
+
+| Table | Business Meaning | Primary Key | Important Fields | Relationships | Possible Analytics |
+|---|---|---|---|---|---|
+
+อธิบาย Table ในภาษาที่ Business User เข้าใจง่าย ไม่ใช่เพียงอธิบายชื่อ Table
+
+ตัวอย่าง:
+
+| Table | Business Meaning | Primary Key | Important Fields | Relationships | Possible Analytics |
+|---|---|---|---|---|---|
+| orders | ข้อมูลคำสั่งซื้อ | order_id | customer_id, order_date, total_amount | customers, order_items | Sales, Revenue, Customer |
+| products | ข้อมูลสินค้า | product_id | product_name, category, price | order_items | Product Performance |
+
+หากไม่สามารถทราบ Business Meaning จาก Schema อย่างแน่นอน ให้ระบุว่า **"ต้องตรวจสอบเพิ่มเติม"** แทนการเดา
+
+---
+
+# ขั้นตอนที่ 3: สร้าง Business Questions 20 ประเด็น
+
+เลือก Business Questions ที่มีความสำคัญต่อการตัดสินใจทางธุรกิจมากที่สุด
+
+คำถามต้องเขียนในภาษาธุรกิจ เช่น
+
+- ยอดขายของบริษัทเป็นอย่างไรในแต่ละเดือน?
+- สินค้ากลุ่มใดสร้างรายได้สูงสุด?
+- ลูกค้ากลุ่มใดมีมูลค่าสูง?
+- ลูกค้ากลับมาซื้อซ้ำมากน้อยเพียงใด?
+- มีแนวโน้มการขายเพิ่มขึ้นหรือลดลงหรือไม่?
+
+หลีกเลี่ยงคำถามที่เป็นเพียง SQL Question เช่น
+
+> SELECT SUM(amount) FROM orders
+
+Business Question ต้องสะท้อน **Decision ที่ธุรกิจต้องการรู้**
+
+---
+
+# ขั้นตอนที่ 4: แปลง Business Question → Data Question
+
+สำหรับแต่ละ Business Question ให้แปลงเป็น **Data Question**
+
+หลักการ:
+
+Business Question = "ธุรกิจต้องการรู้อะไร?"
+
+Data Question = "ข้อมูลต้องถูกวิเคราะห์อย่างไรเพื่อหาคำตอบ?"
+
+ตัวอย่าง:
+
+Business Question:
+> สินค้ากลุ่มใดขายดีที่สุด?
+
+Data Question:
+> เปรียบเทียบจำนวนหน่วยที่ขายและรายได้ของสินค้าแต่ละกลุ่มตามช่วงเวลา เพื่อจัดอันดับ Product Category ตาม Sales Performance
+
+---
+
+# ขั้นตอนที่ 5: ระบุ Tables ที่ต้องใช้
+
+สำหรับแต่ละ Data Question ระบุเฉพาะ Tables ที่จำเป็นจริง
+
+ห้ามใส่ทุก Table เพียงเพื่อให้ดูครบ
+
+รูปแบบ:
+
+**Tables ที่ต้องใช้**
+- orders
+- order_items
+- products
+
+ถ้าต้องใช้หลาย Table ให้อธิบายความสัมพันธ์ที่ต้อง JOIN
+
+ตัวอย่าง:
+
+> orders → order_items → products
+
+---
+
+# ขั้นตอนที่ 6: ระบุ Fields สำคัญ
+
+ระบุ Fields ที่จำเป็นต่อการวิเคราะห์
+
+แบ่งเป็น:
+
+### Dimension Fields
+ใช้สำหรับ GROUP BY / FILTER / SEGMENT
+
+เช่น:
+- order_date
+- customer_id
+- category
+- country
+
+### Measure Fields
+ใช้สำหรับคำนวณ
+
+เช่น:
+- quantity
+- unit_price
+- total_amount
+
+### Key Fields
+ใช้สำหรับ JOIN
+
+เช่น:
+- customer_id
+- product_id
+- order_id
+
+ห้ามสร้าง Field ที่ไม่มีอยู่ใน Schema
+
+---
+
+# ขั้นตอนที่ 7: กำหนด Analysis / KPI
+
+สำหรับแต่ละ Business Question ระบุ:
+
+### Analysis
+ควรวิเคราะห์อะไร เช่น
+
+- Trend Analysis
+- Comparative Analysis
+- Ranking
+- Segmentation
+- Cohort Analysis
+- RFM Analysis
+- Pareto Analysis
+- Basket Analysis
+- Geographic Analysis
+- Time-series Analysis
+- Anomaly Detection
+- Correlation Analysis
+
+### KPI
+
+ระบุ KPI ที่เหมาะสม เช่น
+
+- Revenue
+- Number of Orders
+- Average Order Value (AOV)
+- Units Sold
+- Customer Count
+- Repeat Purchase Rate
+- Customer Lifetime Value (CLV) หากข้อมูลเพียงพอ
+- Conversion Rate หากมีข้อมูลที่จำเป็น
+- Gross Margin หากมีต้นทุน
+- Return Rate หากมีข้อมูลการคืนสินค้า
+
+สำหรับ KPI ทุกตัวต้องระบุ **สูตรคำนวณ**
+
+ตัวอย่าง:
+
+> AOV = Total Revenue / Number of Orders
+
+หากไม่สามารถคำนวณ KPI ได้จากข้อมูลที่มี ให้ระบุ:
+
+> Not directly calculable from current schema
+
+และอธิบายว่าต้องมีข้อมูลอะไรเพิ่ม
+
+---
+
+# ขั้นตอนที่ 8: AI Use Case
+
+สำหรับแต่ละ Business Question เสนอ AI Use Case ที่สามารถต่อยอดจาก Data ได้จริง
+
+ตัวอย่าง:
+
+### Descriptive AI
+- AI-generated Executive Summary
+- Natural Language Data Query
+- Automated Dashboard Explanation
+
+### Diagnostic AI
+- AI Root Cause Analysis
+- Sales Drop Explanation
+- Customer Churn Reason Analysis
+
+### Predictive AI
+- Sales Forecasting
+- Customer Churn Prediction
+- Demand Forecasting
+- Customer Lifetime Value Prediction
+
+### Prescriptive / Generative AI
+- Product Recommendation
+- Next Best Action
+- Personalized Promotion
+- Inventory Recommendation
+- Automated Business Report
+
+สำหรับแต่ละ AI Use Case ให้ระบุว่า:
+
+1. AI ทำอะไร
+2. ใช้ข้อมูลอะไร
+3. Output คืออะไร
+4. Business User จะนำผลไปใช้ตัดสินใจอย่างไร
+
+ห้ามเสนอ AI Use Case ที่ข้อมูลไม่เพียงพอโดยไม่ระบุข้อจำกัด
+
+---
+
+# ขั้นตอนที่ 9: สร้าง Data Question Matrix
+
+แสดงผลลัพธ์หลักเป็นตารางเดียว โดยมี Columns ดังนี้:
+
+| # | Business Question | Data Question | Tables ที่ต้องใช้ | Fields สำคัญ | Analysis / KPI | AI Use Case |
+|---|---|---|---|---|---|---|
+
+ต้องมีทั้งหมด **20 Business Questions**
+
+จัดลำดับจากคำถามระดับพื้นฐานไปสู่ Advanced Analytics เช่น:
+
+1. Sales Overview
+2. Revenue Trend
+3. Order Trend
+4. Product Performance
+5. Category Performance
+6. Customer Performance
+7. Geographic Performance
+8. Average Order Value
+9. Repeat Purchase
+10. Customer Segmentation
+11. RFM
+12. Pareto / 80-20
+13. Basket / Cross-selling
+14. Customer Retention
+15. Product Trend
+16. Anomaly Detection
+17. Demand Forecasting
+18. Customer Value
+19. Recommendation
+20. Executive Decision Support
+
+**แต่ต้องปรับรายการให้ตรงกับข้อมูลจริงใน `ecommerce_Schema`**
+
+---
+
+# ขั้นตอนที่ 10: Data Sufficiency Check
+
+หลังจากสร้าง 20 Questions แล้ว ให้ตรวจสอบว่าแต่ละคำถามสามารถตอบได้จาก Schema จริงหรือไม่
+
+ใช้สถานะ:
+
+- ✅ Fully Supported
+- ⚠️ Partially Supported
+- ❌ Not Supported
+
+พร้อมเหตุผลสั้น ๆ
+
+ตัวอย่าง:
+
+| # | Business Question | Data Sufficiency | Missing Data |
+|---|---|---|---|
+| 1 | Revenue Trend | ✅ Fully Supported | - |
+| 2 | Customer Churn | ⚠️ Partially Supported | ต้องมี customer activity period |
+| 3 | Gross Profit | ❌ Not Supported | ต้องมี product cost |
+
+---
+
+# ขั้นตอนที่ 11: AI-Ready Data Recommendation
+
+จากการวิเคราะห์ Schema ให้เสนอว่า Database ควรเตรียมข้อมูลอย่างไรเพื่อรองรับ AI Analytics
+
+ระบุ:
+
+1. Missing Fields
+2. Missing Tables
+3. Recommended Calculated Fields
+4. Recommended KPI Tables
+5. Recommended Data Mart
+6. Recommended Feature Tables สำหรับ Machine Learning
+7. Recommended Data Quality Rules
+8. Recommended Data Catalog Metadata
+
+ตัวอย่าง:
+
+> หากต้องการทำ Customer Churn Prediction ควรมี Customer Activity History, Last Purchase Date, Purchase Frequency และ Customer Tenure
+
+---
+
+# กฎสำคัญ
+
+1. ห้ามสร้าง Table หรือ Field ที่ไม่มีใน Schema
+2. ต้องอ่าน Schema ก่อนวิเคราะห์
+3. Business Question ต้องเป็นคำถามเชิงธุรกิจ
+4. Data Question ต้องอธิบายวิธีที่ข้อมูลจะตอบ Business Question
+5. Tables ต้องเป็น Tables ที่ใช้จริง
+6. Fields ต้องเป็น Fields ที่มีอยู่จริง
+7. KPI ต้องมีสูตรคำนวณ
+8. ถ้าข้อมูลไม่เพียงพอ ต้องบอกอย่างชัดเจน
+9. แยก Dimension, Measure และ Key Fields
+10. AI Use Case ต้องสัมพันธ์กับข้อมูลจริง
+11. หลีกเลี่ยง AI Use Case ที่เป็นเพียงคำศัพท์สวย ๆ แต่ไม่มีข้อมูลรองรับ
+12. ให้คิดในมุมมอง Executive + Data Analyst + Data Engineer + AI Engineer
+13. เรียงคำถามจาก Basic → Intermediate → Advanced
+14. ให้ความสำคัญกับคำถามที่สามารถนำไปสร้าง Dashboard หรือ AI Analytics ได้จริง
+
+---
+
+# Final Output
+
+ตอบเป็น 4 ส่วน:
+
+## Part 1 — Table Catalog
+
+ตาราง:
+
+| Table | Business Meaning | Primary Key | Important Fields | Relationships | Possible Analytics |
+|---|---|---|---|---|---|
+
+## Part 2 — Business Question → Data Question Matrix
+
+ตาราง:
+
+| # | Business Question | Data Question | Tables ที่ต้องใช้ | Fields สำคัญ | Analysis / KPI | AI Use Case |
+|---|---|---|---|---|---|---|
+
+จำนวน 20 รายการ
+
+## Part 3 — Data Sufficiency Check
+
+ตาราง:
+
+| # | Business Question | Status | Missing Data / Limitation |
+|---|---|---|---|
+
+## Part 4 — AI-Ready Data Recommendations
+
+สรุป:
+
+- Missing Data
+- Recommended Fields
+- Recommended Tables
+- Recommended KPI / Data Mart
+- Recommended ML Features
+- Data Quality Issues
+- AI Analytics Opportunities
+
+สุดท้ายให้สรุปเป็น:
+
+> **Business → Data → KPI → AI**
+
+โดยอธิบายให้เห็นว่า Database เดียวกันสามารถพัฒนาเป็น **AI-Ready Data Source** สำหรับ Dashboard, Natural Language Query, Predictive Analytics และ AI Decision Support ได้อย่างไร
